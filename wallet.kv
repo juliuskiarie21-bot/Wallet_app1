@@ -1,0 +1,265 @@
+#:kivy 2.1.0
+
+WindowManager:
+
+    LoginScreen:
+        name: "login"
+
+    DashboardScreen:
+        name: "dashboard"
+
+    SendScreen:
+        name: "send"
+
+    ReceiveScreen:
+        name: "receive"
+
+    SavingsScreen:
+        name: "savings"
+
+    HistoryScreen:
+        name: "history"
+
+    GoalScreen:
+        name: "goals"
+
+
+# -------------------------
+# LOGIN SCREEN
+# -------------------------
+
+<LoginScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Wallet Login"
+            font_size: 28
+
+        TextInput:
+            id: username
+            hint_text: "Username"
+            multiline: False
+
+        TextInput:
+            id: password
+            hint_text: "Password"
+            password: True
+            multiline: False
+
+        Button:
+            text: "Login"
+            size_hint_y: None
+            height: 50
+            on_press: root.login()
+
+        Button:
+            text: "Register"
+            size_hint_y: None
+            height: 50
+            on_press: root.register()
+
+
+# -------------------------
+# DASHBOARD
+# -------------------------
+
+<DashboardScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Dashboard"
+            font_size: 26
+
+        Label:
+            text: root.balance_text
+            font_size: 24
+
+        GridLayout:
+            cols: 2
+            spacing: 10
+
+            Button:
+                text: "Send Money"
+                on_press:
+                    app.root.current = "send"
+
+            Button:
+                text: "Receive Money"
+                on_press:
+                    app.root.current = "receive"
+
+            Button:
+                text: "Savings"
+                on_press:
+                    app.root.current = "savings"
+
+            Button:
+                text: "History"
+                on_press:
+                    app.root.current = "history"
+
+            Button:
+                text: "Goals"
+                on_press:
+                    app.root.current = "goals"
+
+            Button:
+                text: "Logout"
+                on_press:
+                    app.root.current = "login"
+
+
+# -------------------------
+# SEND SCREEN
+# -------------------------
+
+<SendScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Send Money"
+            font_size: 26
+
+        TextInput:
+            id: send_amount
+            hint_text: "Enter amount"
+            multiline: False
+
+        Button:
+            text: "Send"
+            on_press:
+                root.send_money(send_amount.text)
+
+        Button:
+            text: "Back"
+            on_press:
+                app.root.current = "dashboard"
+
+
+# -------------------------
+# RECEIVE SCREEN
+# -------------------------
+
+<ReceiveScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Receive Money"
+            font_size: 26
+
+        TextInput:
+            id: receive_amount
+            hint_text: "Enter amount"
+            multiline: False
+
+        Button:
+            text: "Receive"
+            on_press:
+                root.receive_money(receive_amount.text)
+
+        Button:
+            text: "Back"
+            on_press:
+                app.root.current = "dashboard"
+
+
+# -------------------------
+# SAVINGS SCREEN
+# -------------------------
+
+<SavingsScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Savings Goal"
+            font_size: 26
+
+        TextInput:
+            id: goal_name
+            hint_text: "Goal Name"
+            multiline: False
+
+        TextInput:
+            id: goal_amount
+            hint_text: "Goal Amount"
+            multiline: False
+
+        Button:
+            text: "Add Goal"
+            on_press:
+                root.add_goal(goal_name.text, goal_amount.text)
+
+        Button:
+            text: "Back"
+            on_press:
+                app.root.current = "dashboard"
+
+
+# -------------------------
+# HISTORY SCREEN
+# -------------------------
+
+<HistoryScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Transaction History"
+            font_size: 26
+
+        Label:
+            id: history_label
+            text: "No history yet"
+
+        Button:
+            text: "Back"
+            on_press:
+                app.root.current = "dashboard"
+
+
+# -------------------------
+# GOALS SCREEN
+# -------------------------
+
+<GoalScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Your Goals"
+            font_size: 26
+
+        Label:
+            id: goal_label
+            text: "No goals yet"
+
+        Button:
+            text: "Back"
+            on_press:
+                app.root.current = "dashboard"
